@@ -1,0 +1,104 @@
+x-mongo-server: &mongo-server
+    image: mongo:latest
+    expose:
+        - "27017"
+    environment:
+        TERM: xterm
+
+services:
+    # RS 1
+    mongo-rs1-n1:
+        <<: *mongo-server
+        container_name: mongo-rs1-n1
+        ports:
+            - 27111:27017
+        command: mongod --shardsvr --replSet mongo-rs1 --dbpath /data/db --port 27017
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /mongo_cluster/data-rs1-n1:/data/db
+    mongo-rs1-n2:
+        <<: *mongo-server
+        container_name: mongo-rs1-n2
+        ports:
+            - 27112:27017
+        command: mongod --shardsvr --replSet mongo-rs1 --dbpath /data/db --port 27017
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /mongo_cluster/data-rs1-n2:/data/db
+    mongo-rs1-n3:
+        <<: *mongo-server
+        container_name: mongo-rs1-n3
+        ports:
+            - 27113:27017
+        command: mongod --shardsvr --replSet mongo-rs1 --dbpath /data/db --port 27017
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /mongo_cluster/data-rs1-n3:/data/db
+    #RS 2
+    mongo-rs2-n1:
+        <<: *mongo-server
+        container_name: mongo-rs2-n1
+        ports:
+            - 27121:27017
+        command: mongod --shardsvr --replSet mongo-rs1 --dbpath /data/db --port 27017
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /mongo_cluster/data-rs2-n1:/data/db
+    mongo-rs2-n2:
+        <<: *mongo-server
+        container_name: mongo-rs2-n2
+        ports:
+            - 27122:27017
+        command: mongod --shardsvr --replSet mongo-rs1 --dbpath /data/db --port 27017
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /mongo_cluster/data-rs2-n2:/data/db
+    mongo-rs2-n3:
+        <<: *mongo-server
+        container_name: mongo-rs2-n3
+        ports:
+            - 27123:27017
+        command: mongod --shardsvr --replSet mongo-rs1 --dbpath /data/db --port 27017
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /mongo_cluster/data-rs2-n3:/data/db
+    # CONFIG SERVER
+    mongo-cfg-1:
+        <<: *mongo-server
+        container_name: mongo-cfg-1
+        command: mongod --configsvr --replSet mongo-rs1-conf --dbpath /data/db --port 27017
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /mongo_cluster/config1:/data/db
+    mongo-cfg-2:
+        <<: *mongo-server
+        container_name: mongo-cfg-2
+        command: mongod --configsvr --replSet mongo-rs1-conf --dbpath /data/db --port 27017
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /mongo_cluster/config2:/data/db
+    mongo-cfg-3:
+        <<: *mongo-server
+        container_name: mongo-cfg-3
+        command: mongod --configsvr --replSet mongo-rs1-conf --dbpath /data/db --port 27017
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /mongo_cluster/config3:/data/db
+    mongo-router-1:
+        <<: *mongo-server
+        container_name: mongo-router-1
+        depends_on:
+            - mongo-cfg-1
+            - mongo-cfg-2
+            - mongo-cfg-3
+        command: mongos --configdb mongors1conf/mongo-cfg-1:27017,mongo-cfg-2:27017,mongo-cfg-3:27017 --port 27017
+        ports:
+            - 27019:27017
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+    # CONFIG
+    mongo-config:
+        image: mongo:latest
+        command: /scripts/init.sh
+        volumes:
+            - ./scripts:/scripts

@@ -1,0 +1,81 @@
+x-mongo-server: &mongo-server
+    image: mongo:latest
+    expose:
+        - "27017"
+
+services:
+    # RS 1
+    mongo1:
+        <<: *mongo-server
+        container_name: mongo1
+        ports:
+            - 27101:27017
+        entrypoint:
+            [
+                "mongod",
+                "--replSet",
+                "myReplicaSet",
+                "--bind_ip",
+                "localhost,mongo1",
+            ]
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /mongo_cluster/data-1:/data/db
+    mongo2:
+        <<: *mongo-server
+        container_name: mongo2
+        ports:
+            - 27102:27017
+        entrypoint:
+            [
+                "mongod",
+                "--replSet",
+                "myReplicaSet",
+                "--bind_ip",
+                "localhost,mongo2",
+            ]
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /mongo_cluster/data-2:/data/db
+    mongo3:
+        <<: *mongo-server
+        container_name: mongo3
+        ports:
+            - 27103:27017
+        entrypoint:
+            [
+                "mongod",
+                "--replSet",
+                "myReplicaSet",
+                "--bind_ip",
+                "localhost,mongo3",
+            ]
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /mongo_cluster/data-3:/data/db
+
+    mongosetup:
+        <<: *mongo-server
+        depends_on:
+            - mongo1
+            - mongo2
+            - mongo3
+        volumes:
+            - ./scripts:/scripts
+        restart: "no"
+        entrypoint:
+            ["mongosh", "--host", "mongo1:27017", "<", "/scripts/init.js"]
+
+    mongotester:
+        build:
+            context: ../MongoTester
+            dockerfile: Dockerfile
+        depends_on:
+            - mongosetup
+        volumes:
+            - ../MongoTester/code:/code
+            - ../data:/output
+        environment:
+            CONNECTION_CHAIN: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/
+            INTERATIONS: 10
+            OUTPUT_FILENAME: "/output/replica-cluster-3.json"

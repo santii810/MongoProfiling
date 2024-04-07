@@ -1,0 +1,47 @@
+{
+  "Iter0": {
+    "size": 10,
+    "time": 0.35828232765197754,
+    "registros insertados/seg": 27.910949628845877,
+    "find in compras": 0.13820767402648926,
+    "compras found elements/s": 7.23548823930238,
+    "find in ventas": 0.07137274742126465,
+    "ventas found elements/s": 14.010950063301921
+  },
+  "Iter1": {
+    "size": 100,
+    "time": 2.3821537494659424,
+    "registros insertados/seg": 41.97881854704765,
+    "find in compras": 0.08750391006469727,
+    "compras found elements/s": 114.28060749064079,
+    "find in ventas": 0.0614626407623291,
+    "ventas found elements/s": 162.700461222764
+  },
+  "Iter2": {
+    "size": 1000,
+    "time": 28.798444032669067,
+    "registros insertados/seg": 34.72409824869691,
+    "find in compras": 0.07384681701660156,
+    "compras found elements/s": 1354.154505772658,
+    "find in ventas": 0.06936311721801758,
+    "ventas found elements/s": 1441.6883786477847
+  },
+  "Iter3": {
+    "size": 10000,
+    "time": 238.88445806503296,
+    "registros insertados/seg": 41.86124154329722,
+    "find in compras": 0.09702348709106445,
+    "compras found elements/s": 10306.78271810019,
+    "find in ventas": 0.13035321235656738,
+    "ventas found elements/s": 7671.464185052886
+  },
+  "Iter4": {
+    "size": 100000,
+    "time": 2156.086447954178,
+    "registros insertados/seg": 46.38032955259558,
+    "find in compras": 0.5938646793365479,
+    "compras found elements/s": 16838.852937291664,
+    "find in ventas": 0.5878129005432129,
+    "ventas found elements/s": 17012.215946194352
+  }
+}

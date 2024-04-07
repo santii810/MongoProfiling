@@ -1,0 +1,57 @@
+{
+  "Iter0": {
+    "insert.parallel.size": 10,
+    "insert.parallel.time": 0.20721030235290527,
+    "insert.parallel.rate": 48.26014868203193,
+    "find.compras.time": 0.5952730178833008,
+    "find.compras.size": 132626,
+    "find.compras.rate": 222798.60839585445,
+    "find.ventas.time": 0.5238940715789795,
+    "find.ventas.size": 126300,
+    "find.ventas.rate": 241079.26936325274
+  },
+  "Iter1": {
+    "insert.parallel.size": 20,
+    "insert.parallel.time": 0.19430899620056152,
+    "insert.parallel.rate": 102.92884215899316,
+    "find.compras.time": 0.5228128433227539,
+    "find.compras.size": 132686,
+    "find.compras.rate": 253792.54104912543,
+    "find.ventas.time": 0.49794840812683105,
+    "find.ventas.size": 126360,
+    "find.ventas.rate": 253761.2289500787
+  },
+  "Iter2": {
+    "insert.parallel.size": 40,
+    "insert.parallel.time": 0.30611419677734375,
+    "insert.parallel.rate": 130.67018916830745,
+    "find.compras.time": 0.5166316032409668,
+    "find.compras.size": 132806,
+    "find.compras.rate": 257061.31635554775,
+    "find.ventas.time": 0.48522281646728516,
+    "find.ventas.size": 126480,
+    "find.ventas.rate": 260663.75221357212
+  },
+  "Iter3": {
+    "insert.parallel.size": 80,
+    "insert.parallel.time": 0.4876079559326172,
+    "insert.parallel.rate": 164.06623195265345,
+    "find.compras.time": 0.5419070720672607,
+    "find.compras.size": 133046,
+    "find.compras.rate": 245514.41909118785,
+    "find.ventas.time": 0.47372984886169434,
+    "find.ventas.size": 126720,
+    "find.ventas.rate": 267494.2275739859
+  },
+  "Iter4": {
+    "insert.parallel.size": 160,
+    "insert.parallel.time": 0.9210782051086426,
+    "insert.parallel.rate": 173.7094625761205,
+    "find.compras.time": 0.4870016574859619,
+    "find.compras.size": 133526,
+    "find.compras.rate": 274179.76499155746,
+    "find.ventas.time": 0.47496652603149414,
+    "find.ventas.size": 127200,
+    "find.ventas.rate": 267808.34654349013
+  }
+}

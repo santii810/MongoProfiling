@@ -1,0 +1,10 @@
+# This is dev lab. Can add here that u want without fear
+jupyterlab
+notebook
+pymongo
+numpy
+matplotlib
+pandas
+plotly
+calplot
+jupyter
