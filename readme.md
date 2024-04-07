@@ -2,19 +2,25 @@
 
 Este repo contiene pruebas para montar un cluster mongo
 
-## 1. Instalación - Uso
+**Índice**
 
-Cada carpeta contiene un docker-compose y todos los ficheros necesarios para las pruebas
-El compose levanta múltiples instancias de mongo configuradas en modo cluster y una instancia de `MongoTester` que se usa para hacer varias pruebas. Esta instancia permite cambiar la configuración de prueba modificando las variables de entorno que se le pasan
-Los resultados se van a ficheros json en la carpeta `data` donde podemos analizar los resultados.
+1. [Instalación - Uso](#id1)
+2. [Pruebas de carga](#id2)
+3.
+
+## Instalación - Uso <a name="id1"></a>
+
+Cada carpeta contiene un docker-compose y todos los ficheros necesarios para las pruebas  
+El compose levanta múltiples instancias de mongo configuradas en modo cluster y una instancia de `MongoTester` que se usa para hacer varias pruebas. Esta instancia permite cambiar la configuración de prueba modificando las variables de entorno que se le pasan.  
+Los resultados se van a ficheros json en la carpeta `data` donde podemos analizar los resultados.  
 El fichero `plot_result.ipybn` contiene un jupyter notebook con un análisis de los resultados
 
-## Pruebas de carga
+## Pruebas de carga <a name="id1"></a>
 
 ### Descripción de las pruebas
 
-Las pruebas se ejecutan N veces con un incremento exponencial del tamaño de las operaciones.
-En cada iteración se insertan datos, luego se consultan y finalmente se borran.
+Las pruebas se ejecutan N veces con un incremento exponencial del tamaño de las operaciones.  
+En cada iteración se insertan datos, luego se consultan y finalmente se borran.  
 En cuanto a las pruebas de inserción, se inserta de tres formas distintas:
 
 -   Inserción `secuencial`: Una operación para cada elemento
@@ -23,7 +29,8 @@ En cuanto a las pruebas de inserción, se inserta de tres formas distintas:
 
 ### Consideraciones generales
 
--   Sin importar el tamaño de las pruebas ni la configuraciónd el cluster, la inserción en batch siempre ha sido la más eficiente
+Sin importar el tamaño de las pruebas ni la configuraciónd el cluster, la inserción en batch siempre ha sido la más eficiente  
+![alt text](images/tipos-insercion.png)
 
 ### Cluster 3 nodos
 
