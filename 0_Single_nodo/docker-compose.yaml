@@ -1,0 +1,20 @@
+x-mongo-server: &mongo-server
+    image: mongo:latest
+
+version: "3"
+
+services:
+    mongo1:
+        <<: *mongo-server
+        ports:
+            - 27017:27017
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /mongo_single/data-1:/data/db
+        networks:
+            - mongo-test
+
+networks:
+    mongo-test:
+        driver: bridge
+        external: true

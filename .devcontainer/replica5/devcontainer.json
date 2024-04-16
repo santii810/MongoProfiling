@@ -1,0 +1,52 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
+{
+    "name": "lol-lab",
+    "dockerComposeFile": "../../docker-compose.devcontainer.yml",
+    "workspaceFolder": "/workspace/lol-lab",
+    "service": "lol-lab",
+    "shutdownAction": "none",
+    "remoteUser": "root",
+    "containerEnv": {
+        "SHELL": "/bin/zsh",
+        "TZ": "Europe/Madrid"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "eamodio.gitlens",
+                "esbenp.prettier-vscode",
+                "mohsen1.prettify-json",
+                "oderwat.indent-rainbow",
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-python.black-formatter",
+                "ms-python.flake8",
+                "eamodio.gitlens",
+                "ms-azuretools.vscode-docker",
+                "christian-kohler.path-intellisense",
+                "oderwat.indent-rainbow",
+                "littlefoxteam.vscode-python-test-adapter",
+                "mgesbert.python-path",
+                "ms-toolsai.jupyter"
+            ]
+        }
+    },
+    "mounts": [
+        {
+            "source": "/var/run/docker.sock",
+            "target": "/var/run/docker.sock",
+            "type": "bind"
+        },
+        {
+            "source": "em-api-container-volume",
+            "target": "/root/.vscode-server/extensions",
+            "type": "volume"
+        },
+        {
+            "source": "em-api-container-volume-insiders",
+            "target": "/root/.vscode-server-insiders/extensions",
+            "type": "volume"
+        }
+    ]
+}

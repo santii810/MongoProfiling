@@ -77,5 +77,6 @@ services:
             - ../data:/output
         environment:
             CONNECTION_CHAIN: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/
-            INTERATIONS: 10
+            INTERATIONS: 100
             OUTPUT_FILENAME: "/output/replica-cluster-3.json"
+            TEST_NAME: replica-3

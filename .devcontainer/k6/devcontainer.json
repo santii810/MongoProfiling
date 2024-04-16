@@ -1,0 +1,50 @@
+{
+    "name": "k6",
+    "build": {
+        "dockerfile": "../../load-test/Dockerfile",
+        "context": "../../load-test/"
+    },
+    "workspaceFolder": "/workspaces/mongo-test/load-test",
+    "shutdownAction": "none",
+    "remoteUser": "root",
+    "runArgs": [
+        "--network",
+        "mongo-test"
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "eamodio.gitlens",
+                "esbenp.prettier-vscode",
+                "mohsen1.prettify-json",
+                "oderwat.indent-rainbow",
+                "eamodio.gitlens",
+                "ms-azuretools.vscode-docker",
+                "christian-kohler.path-intellisense",
+                "oderwat.indent-rainbow",
+                "hbenl.vscode-test-explorer",
+                "littlefoxteam.vscode-python-test-adapter",
+                "mgesbert.python-path",
+                "github.vscode-github-actions",
+                "GitHub.vscode-pull-request-github"
+            ]
+        }
+    },
+    "mounts": [
+        {
+            "source": "/var/run/docker.sock",
+            "target": "/var/run/docker.sock",
+            "type": "bind"
+        },
+        {
+            "source": "em-api-container-volume",
+            "target": "/root/.vscode-server/extensions",
+            "type": "volume"
+        },
+        {
+            "source": "em-api-container-volume-insiders",
+            "target": "/root/.vscode-server-insiders/extensions",
+            "type": "volume"
+        }
+    ]
+}
